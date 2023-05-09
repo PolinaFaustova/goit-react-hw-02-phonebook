@@ -3,15 +3,12 @@ import styled from 'styled-components';
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background-color: #fff;
-  padding: 40px;
+  padding: 50px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 50%;
   margin: 0 auto;
-
+  width: 350px;
 `;
 
 
@@ -41,8 +38,8 @@ export const Button = styled.button`
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 15px 30px;
+  font-size: 17px;
   cursor: pointer;
   transition: all 0.3s ease;
 
