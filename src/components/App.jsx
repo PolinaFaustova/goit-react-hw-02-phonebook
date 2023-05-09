@@ -1,5 +1,8 @@
 import { Component } from "react";
 import { nanoid } from 'nanoid';
+import { ContactForm } from "./ContactForm/index";
+import {Filter} from './Filter/index'
+import { ContactList } from "./ContactList";
 
 export class App extends Component {
 
@@ -43,44 +46,20 @@ export class App extends Component {
       <>
       <div>
       <h2>Phonebook</h2>
-      <p>Name</p>
-      <input
-      type="text"
-      name="name"
-      pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-      title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-      required
-      value={name}
+      <ContactForm name={name}
+      number={number}
       onChange={this.handleChange}
-      /> 
-      </div>
-
-      <div>
-      <p>Number</p> 
-      <input
-       type="tel"
-       name="number"
-       pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-       title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-       required
-       value={number}
-       onChange={this.handleChange}
-       />  
-      <button type='button' onClick={this.handleAddContact}>Add contact</button>
-      </div>
+      addContact={this.handleAddContact}/>
       
-      <div>
+      
+      
         <h2>Contacts</h2>
-        <input
-          type="text"
-          name="filter"
-          placeholder="Search contacts by name"
-          value={filter}
-          onChange={this.handleFilterChange}
+        <Filter filter={filter}
+        onChange={this.handleFilterChange}/>
+        <ContactList filteredContacts={filteredContacts}
+        name={name}
+        number={number}
         />
-        {filteredContacts.map(({id, name, number}) => (
-          <p key={id}>{name}: {number}</p>
-        ))}
       </div>
       </>
     );
