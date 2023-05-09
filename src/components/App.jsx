@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from "./ContactForm/index";
 import {Filter} from './Filter/index'
 import { ContactList } from "./ContactList";
+import { Container, TitlePhonebook, TitelContacts} from './App.styled';
 
 export class App extends Component {
 
@@ -25,6 +26,12 @@ export class App extends Component {
 
   handleAddContact = () => {
     const {name, number} = this.state;
+    const checkContactExist = this.state.contacts.some((contact)=> contact.name === name);
+    if(checkContactExist) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
     const newContact = { id: nanoid(), name, number};
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
@@ -32,7 +39,13 @@ export class App extends Component {
       number: ''
     }));
   };
-
+    
+  handleDeleteContact = (id) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter((contact) => contact.id !== id),
+    }));
+  };
+  
   handleFilterChange = (event) => {
     this.setState({filter: event.target.value});
   }
@@ -43,25 +56,24 @@ export class App extends Component {
     const filteredContacts = contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase().trim()));
 
     return (
-      <>
-      <div>
-      <h2>Phonebook</h2>
+      <Container>
+      <TitlePhonebook>Phonebook</TitlePhonebook>
       <ContactForm name={name}
       number={number}
       onChange={this.handleChange}
       addContact={this.handleAddContact}/>
       
       
-      
-        <h2>Contacts</h2>
+         
+        <TitelContacts>Contacts</TitelContacts>
         <Filter filter={filter}
         onChange={this.handleFilterChange}/>
         <ContactList filteredContacts={filteredContacts}
         name={name}
         number={number}
+        handleDeleteContact={this.handleDeleteContact}
         />
-      </div>
-      </>
+      </Container>
     );
   }
   

@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
+import { FormContainer, Input, Button, Title } from './ContactForm.styled';
+
+
 export const ContactForm = ({name,number,onChange,addContact}) => (
-    <>
-    <p>Name</p>
-    <input
+    <FormContainer>
+    <Title>Name</Title>
+    <Input
     type="text"
     name="name"
     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -14,8 +17,8 @@ export const ContactForm = ({name,number,onChange,addContact}) => (
     
 
 
-    <p>Number</p> 
-    <input
+    <Title>Number</Title> 
+    <Input
      type="tel"
      name="number"
      pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -24,9 +27,9 @@ export const ContactForm = ({name,number,onChange,addContact}) => (
      value={number}
      onChange={onChange}
      />  
-    <button type='button' onClick={addContact}>Add contact</button>
+    <Button type='button' onClick={addContact}>Add contact</Button>
 
-    </>
+    </FormContainer>
        
 )
 

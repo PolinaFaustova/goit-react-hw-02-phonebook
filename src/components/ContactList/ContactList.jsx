@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
 
-export const ContactList = ({filteredContacts}) => {
+export const ContactList = ({filteredContacts, handleDeleteContact}) => {
 
     return (
         <>
     {filteredContacts.map(({id, name, number}) => (
-          <p key={id}>{name}: {number}</p>
+          <p key={id}>
+          {name}: {number}
+          <button type='button' onClick={()=> handleDeleteContact(id)}>
+            Delete
+            </button>
+            </p>
     ))}
     </>
 )};
@@ -20,4 +25,5 @@ export const ContactList = ({filteredContacts}) => {
     number: PropTypes.string.isRequired,
       })
     ).isRequired,
+    handleDeleteContact: PropTypes.func.isRequired,
   };
