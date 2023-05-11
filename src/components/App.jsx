@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { nanoid } from 'nanoid';
 import { ContactForm } from "./ContactForm/index";
 import {Filter} from './Filter/index'
 import { ContactList } from "./ContactList";
@@ -15,30 +14,27 @@ export class App extends Component {
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
     filter: '',
-    name: '',
-    number: ''
-  }
-  
-  handleChange = (event) => {
-    const {name, value} = event.target;
-    this.setState({[name]: value});
   }
 
-  handleAddContact = () => {
-    const {name, number} = this.state;
-    const checkContactExist = this.state.contacts.some((contact)=> contact.name === name);
-    if(checkContactExist) {
-      alert(`${name} is already in contacts.`);
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
+
+  handleAddContact = (newContact) => {
+    const checkContactExist = this.state.contacts.some(
+      (contact) => contact.name === newContact.name
+    );
+    if (checkContactExist) {
+      alert(`${newContact.name} is already in contacts.`);
       return;
     }
 
-    const newContact = { id: nanoid(), name, number};
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       contacts: [...prevState.contacts, newContact],
-      name: '',
-      number: ''
     }));
   };
+  
     
   handleDeleteContact = (id) => {
     this.setState((prevState) => ({
@@ -58,10 +54,11 @@ export class App extends Component {
     return (
       <Container>
       <TitlePhonebook>Phonebook</TitlePhonebook>
-      <ContactForm name={name}
-      number={number}
-      onChange={this.handleChange}
-      addContact={this.handleAddContact}/>
+      <ContactForm name={this.state.name}
+      number={this.state.number}
+      onChange={this.handleChange} 
+      onAddContact={this.handleAddContact}
+      contacts={this.state.contacts}/>
       
       
          
